@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 // Manejo de errores para todas las rutas
 app.use((err, req, res, next) => {
   console.error(err.stack); // Registrar el error en la consola
-  res.status(500).send('Error interno del servidor'); // Enviar respuesta de error
+  res.status(500).send('Error interno del servidor: ' + err.message); // Enviar respuesta de error con mensaje
 });
 
 // Iniciar el servidor
