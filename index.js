@@ -25,6 +25,11 @@ app.use((err, req, res, next) => {
   res.status(500).send('Error interno del servidor: ' + err.message); // Enviar respuesta de error con mensaje
 });
 
+// Manejo de rutas no encontradas (404)
+app.use((req, res) => {
+  res.status(404).send('Ruta no encontrada'); // Enviar respuesta 404 si la ruta no existe
+});
+
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`); // Mensaje de inicio del servidor
