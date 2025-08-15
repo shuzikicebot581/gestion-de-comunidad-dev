@@ -6,8 +6,8 @@ const app = express();
 const port = 3000;
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Habilitar CORS para todas las solicitudes
+app.use(express.json()); // Analizar solicitudes JSON
 
 // Conexión a la base de datos
 mongoose.connect('mongodb://localhost:27017/gestión-comunidad', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -16,15 +16,16 @@ mongoose.connect('mongodb://localhost:27017/gestión-comunidad', { useNewUrlPars
 
 // Rutas
 app.get('/', (req, res) => {
-  res.send('API de Gestión de Comunidad');
+  res.send('API de Gestión de Comunidad'); // Respuesta a la ruta raíz
 });
 
-// Manejo de errores para la ruta raíz
+// Manejo de errores para todas las rutas
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Error interno del servidor');
+  console.error(err.stack); // Registrar el error en la consola
+  res.status(500).send('Error interno del servidor'); // Enviar respuesta de error
 });
 
+// Iniciar el servidor
 app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+  console.log(`Servidor escuchando en http://localhost:${port}`); // Mensaje de inicio del servidor
 });
