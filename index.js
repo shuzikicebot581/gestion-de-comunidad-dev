@@ -19,6 +19,12 @@ app.get('/', (req, res) => {
   res.send('API de Gestión de Comunidad');
 });
 
+// Manejo de errores para la ruta raíz
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Error interno del servidor');
+});
+
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });
